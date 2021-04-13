@@ -1,0 +1,7 @@
+#!/bin/bash
+
+while [ 1 ]
+do
+    echo -ne "\033]0;`date +"%a %b %e %Y  at %l:%M %p"`\007"
+    sleep 15
+done

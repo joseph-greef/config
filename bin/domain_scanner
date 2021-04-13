@@ -1,0 +1,43 @@
+#!/usr/bin/python3
+
+import os
+import sys
+import threading
+
+ipstart = sys.argv[1]
+
+found_ips = []
+def scan_ip(ip_addr):
+    global found_ips
+    result = os.system("fping -c1  -t250 " + ipstart + str(ip_addr) + " > /dev/null 2> /dev/null")
+    if result == 0:
+        found_ips.append(ip_addr)
+
+def scan_ips():
+    global found_ips
+    found_ips = []
+    threads = []
+    for i in range(1, 255):
+        t = threading.Thread(target=scan_ip, args=(i,))
+        t.start()
+        threads.append(t)
+
+    for t in threads:
+        t.join()
+
+    found_ips.sort()
+    return found_ips
+
+round1_ips = scan_ips()
+print(round1_ips)
+
+input("Press enter for next")
+
+round2_ips = scan_ips()
+print(round2_ips)
+
+difference = list(set(round2_ips) - set(round1_ips))
+
+for ip in difference:
+    print(ipstart + str(ip))
+

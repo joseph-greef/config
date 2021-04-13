@@ -1,0 +1,6 @@
+#!/bin/bash
+touch /tmp/aww
+if [ $(($(date +%s) - $(date +%s -r "/tmp/aww"))) -gt 3600 ]; then
+    wget  https://www.reddit.com/r/aww/top/?t=hour -O /tmp/aww
+fi
+firefox `grep -o "https://www.reddit.com/r/aww/comments/[a-zA-Z0-9]*/[a-zA-Z0-9_]*/" /tmp/aww | shuf -n 1`
