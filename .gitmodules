@@ -1,0 +1,6 @@
+[submodule ".config/nvim/bundle/vim-better-whitespace"]
+	path = .config/nvim/bundle/vim-better-whitespace
+	url = git://github.com/ntpeters/vim-better-whitespace.git
+[submodule ".config/nvim/bundle/vim-flake8"]
+	path = .config/nvim/bundle/vim-flake8
+	url = https://github.com/nvie/vim-flake8.git
