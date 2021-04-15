@@ -13,7 +13,7 @@ export EDITOR="$VISUAL"
 
 export PATH=$PATH:~/bin
 
-export CUDACXX=/usr/local/cuda-10.2/bin/nvcc
+export CUDACXX=/usr/local/cuda-11.2/bin/nvcc
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -193,5 +193,3 @@ mcd () {
     cd $1
 }
 
-export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
-source "$HOME/.cargo/env"
