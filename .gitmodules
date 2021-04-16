@@ -4,3 +4,6 @@
 [submodule ".config/nvim/bundle/vim-flake8"]
 	path = .config/nvim/bundle/vim-flake8
 	url = https://github.com/nvie/vim-flake8.git
+[submodule ".config/nvim/bundle/csv"]
+	path = .config/nvim/bundle/csv
+	url = https://github.com/chrisbra/csv.vim
