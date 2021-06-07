@@ -9,9 +9,11 @@ ipstart = sys.argv[1]
 found_ips = []
 def scan_ip(ip_addr):
     global found_ips
-    result = os.system("fping -c1  -t250 " + ipstart + str(ip_addr) + " > /dev/null 2> /dev/null")
+    result = os.system("fping -c1 -t2000 " + ipstart + str(ip_addr) + " > /dev/null 2> /dev/null")
     if result == 0:
         found_ips.append(ip_addr)
+    elif ip_addr == 1:
+        print("Missing fping, please install")
 
 def scan_ips():
     global found_ips
