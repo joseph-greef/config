@@ -8,31 +8,31 @@ case $- in
       *) return;;
 esac
 
+
+# EXPORT variables
+export PATH=$PATH:~/bin
+
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-export PATH=$PATH:~/bin
+# Eternal bash history.
+# ---------------------
+# Undocumented feature which sets the size to "unlimited".
+# http://stackoverflow.com/questions/9457233/unlimited-bash-history
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTTIMEFORMAT="[%F %T] "
+# Change the file location because certain bash sessions truncate .bash_history file upon close.
+# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+export HISTFILE=~/.bash_eternal_history
+# Force prompt to write history after every command.
+# http://superuser.com/questions/20900/bash-history-loss
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-export CUDACXX=/usr/local/cuda-11.2/bin/nvcc
-
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=
-HISTFILESIZE=
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -70,15 +70,6 @@ else
 fi
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -92,9 +83,10 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
+# Aliases
+
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -103,22 +95,23 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"' 
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
+# Load external files
+
+# user aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# JGreef aliases
+# bash helper functions
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+fi
 
-alias lock='dm-tool switch-to-greeter'
-alias xlock='dm-tool switch-to-greeter'
-alias slock='dm-tool switch-to-greeter'
-alias make='make -j12'
-alias scsh='gnome-screenshot -f /tmp/screenshot.png -a'
+# per computer configuration
+if [ -f ~/.bash_local ]; then
+    . ~/.bash_local
+fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -130,66 +123,4 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-export PROFILE_CODE=0
-export PROFILER_DIR="$HOME/stats"
-export PYTHON_PROFILER="python -m cProfile -o "
-export CPP_PROFILER="valgrind --tool=callgrind --callgrind-out-file="
-
-# Eternal bash history.
-# ---------------------
-# Undocumented feature which sets the size to "unlimited".
-# http://stackoverflow.com/questions/9457233/unlimited-bash-history
-export HISTFILESIZE=
-export HISTSIZE=
-export HISTTIMEFORMAT="[%F %T] "
-# Change the file location because certain bash sessions truncate .bash_history file upon close.
-# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
-export HISTFILE=~/.bash_eternal_history
-# Force prompt to write history after every command.
-# http://superuser.com/questions/20900/bash-history-loss
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
-
-
-function apt-history(){
-    case "$1" in
-      install)
-            cat /var/log/dpkg.log | grep 'install '
-            ;;
-      upgrade|remove)
-            cat /var/log/dpkg.log | grep $1
-            ;;
-      rollback)
-            cat /var/log/dpkg.log | grep upgrade | \
-                grep "$2" -A10000000 | \
-                grep "$3" -B10000000 | \
-                awk '{print $4"="$5}'
-            ;;
-      *)
-            cat /var/log/dpkg.log
-            ;;
-    esac
-}
-
-cdd () {
-    DIR=`pwd`
-    while [ 1 ]
-    do
-        if [[ `pwd` == *src ]]
-        then
-            return
-        fi
-
-        if [[ `pwd` == / ]]
-        then
-            cd $DIR
-            return
-        fi
-        cd ..
-    done
-}
-mcd () {
-    mkdir -p $1
-    cd $1
-}
 
