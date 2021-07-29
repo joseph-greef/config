@@ -23,17 +23,18 @@ cdd () {
     DIR=`pwd`
     while [ 1 ]
     do
-        if [[ `pwd` == *src ]]
+        cd ..
+        if [[ `pwd` == *source || `pwd` == *src ]]
         then
             return
         fi
+        echo `pwd`
 
         if [[ `pwd` == / ]]
         then
             cd $DIR
             return
         fi
-        cd ..
     done
 }
 mcd () {
