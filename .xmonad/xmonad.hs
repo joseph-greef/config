@@ -22,15 +22,15 @@ myStartupHook = do
     spawnOn "1" myTerminal
     spawnOn "1" myTerminal
     spawnOn "1" myTerminal
-    spawnOn "3:firefox" "firefox"
     spawnOn "6:chromium" "chromium"
-    spawnOn "9:discord" "discord"
-    spawnOn "9:discord" "pavucontrol"
+    spawnOn "9:pavu" "pavucontrol"
+    spawnOn "3:firefox" "firefox"
+    spawnOn "3:firefox" "gnome-terminal -e title_clock"
 
 myExtraWorkspaces = ["10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"]
 myExtraWorkspaceKeys = [xK_0] ++ [xK_F1 .. xK_F12]
 
-myWorkspaces = ["1","2","3:firefox","4","5","6:chromium","7","8","9:discord"] ++ myExtraWorkspaces
+myWorkspaces = ["1","2","3:firefox","4","5","6:chromium","7:steam","8:discord","9:pavu"] ++ myExtraWorkspaces
 myWorkspaceKeys = [xK_1 .. xK_9]
 
 myAdditionalKeys =
