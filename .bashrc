@@ -14,6 +14,7 @@ export PATH=$PATH:~/bin
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
+export CUDACXX=/usr/local/cuda-11.2/bin/nvcc
 
 # Eternal bash history.
 # ---------------------
@@ -69,6 +70,8 @@ else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
+
+title_clock &
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
