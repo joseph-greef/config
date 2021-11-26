@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+
+import sys
+
+total_mass = float(sys.argv[1])
+percent = float(sys.argv[2]) / 100
+
+flour = total_mass / (1 + percent)
+water = total_mass - flour
+
+print("flour: {:.1f}g water: {:.1f}g".format(flour, water))
+
+print("salt:")
+for salt_percent in range(10, 30, 2):
+    salt_percent /= 1000
+    print("{:.2%}: {:.1f}g".format(salt_percent, flour*salt_percent))
+
+
+
