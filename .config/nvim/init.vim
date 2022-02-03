@@ -197,11 +197,10 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
-" autocmd Filetype n
-" autocmd Filetype cpp setlocal tabstop=2                                       
-" autocmd Filetype cpp setlocal shiftwidth=2 
-autocmd Filetype xacro setlocal tabstop=2                                       
-autocmd Filetype xacro setlocal shiftwidth=2 
+autocmd Filetype xacro setlocal tabstop=2 shiftwidth=2
+autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2
+autocmd Filetype css setlocal tabstop=2 shiftwidth=2
+autocmd Filetype html setlocal tabstop=2 shiftwidth=2
 
 colors torte
 
