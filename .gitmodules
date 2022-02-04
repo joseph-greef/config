@@ -7,3 +7,6 @@
 [submodule ".config/nvim/bundle/csv"]
 	path = .config/nvim/bundle/csv
 	url = https://github.com/chrisbra/csv.vim
+[submodule ".config/nvim/bundle/vim-gutentags"]
+	path = .config/nvim/bundle/vim-gutentags
+	url = https://github.com/ludovicchabant/vim-gutentags.git
