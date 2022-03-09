@@ -1,8 +1,0 @@
-#This config file is for the universal-ctags version
-#General settings
---recurse=yes
---exclude=.git
-
-#IAR settings
---exclude=Release
---exclude=settings*

@@ -46,6 +46,8 @@
 set mouse=a
 set pastetoggle=<F2>
 set colorcolumn=80
+set title
+set titlestring=%t
 "
 " Sets how many lines of history VIM has to remember
 set history=700
@@ -197,10 +199,11 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
-autocmd Filetype xacro setlocal tabstop=2 shiftwidth=2
-autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2
 autocmd Filetype css setlocal tabstop=2 shiftwidth=2
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2
+autocmd Filetype sql setlocal tabstop=2 shiftwidth=2
+autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2
+autocmd Filetype xacro setlocal tabstop=2 shiftwidth=2
 
 colors torte
 
@@ -215,3 +218,19 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=black
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=darkgrey
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Gutentags config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" These can be used to make subproject organization which can speed it up
+"let g:gutentags_add_default_project_roots = 0
+"let g:gutentags_project_root = ['package.json', '.git']
+
+"Add more info to tags "Ignore the right files let g:gutetags_ctags_exclude = [ \
+
+let g:gutentags_ctags_extra_args = [
+    \ '--tag-relative=yes',
+    \ '--fields=+ailmnS',
+\ ]
+
