@@ -1,0 +1,1 @@
+To block the new "Office Key" that automatically launches Office when you do "Stuff(tm)", use the following command to set the office autolauncher to no-op: `REG ADD HKCU\Software\Classes\ms-officeapp\Shell\Open\Command /t REG_SZ /d rundll32`.
