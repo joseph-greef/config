@@ -43,4 +43,4 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
   desc = "Lazy load clipboard",
 })
 
-vim.cmd('source viminit.vim')
+vim.cmd('source ~/.config/nvim/viminit.vim')
