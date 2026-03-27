@@ -1,0 +1,4 @@
+..\steamcmd\steamcmd.exe +force_install_dir "$HOME\servers\rustserver\" +login anonymous  +app_update 258550 +quit
+wget https://umod.org/games/rust/download?tag=public -O oxide.zip
+Expand-Archive -Path ".\oxide.zip" -DestinationPath "." -Force
+.\RustDedicated.exe -batchmode +server.port 28015 +server.level "Procedural Map" +server.seed 28096 +server.worldsize 4250 +server.maxplayers 10  +server.hostname "Rustylemon" +server.description "Lemon juice increases the oxidation rate of iron" +server.url "http://lalemons.com" +server.headerimage "http://lalemons.com/lalemons.jpg" +server.identity "server1" +rcon.port 28016 +rcon.password testpass +rcon.web 1
